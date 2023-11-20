@@ -4,8 +4,14 @@ The attached notebook has an example of using IRSA with Ray clusters that need t
 
 The notebook demonstrates a simple workaround to the scaling challenge. 
 
-1. We do not inject the side-car container. The side-car is convinience container to configure the user workload without any action on part of the user. The updated [mutation](https://github.com/dominodatalab/domino-field-solutions-installations/blob/main/irsa/helm/irsa/templates/mutation.yaml) removes the side-car injection. If you want the injection use this mutation [file](https://github.com/dominodatalab/domino-field-solutions-installations/blob/main/irsa/mutation-backup.yaml) instead.
-2. Next the user now assumed the responsibility for fetching and saving the `AWS_CONFIG_FILE`. Note that the containers are fully enabled with all the necessary mounts of the `AWS_WEB_IDENTITY_TOKEN_FILE` and other environment variables. The only missing part is the actual file `AWS_CONFIG_FILE`. The user makes the following call to create the file
+1. We do not inject the side-car container. The side-car is convinience container to configure the user workload without any action on part of the user. The updated [mutation](https://github.com/dominodatalab/domino-field-solutions-installations/blob/main/irsa/helm/irsa/templates/mutation.yaml) removes the side-car injection. The changes to the `values.yaml` is to add
+the following [section](https://github.com/dominodatalab/domino-field-solutions-installations/blob/main/irsa/values.yaml)
+```
+irsa_client_sidecar:
+  enabled: false
+```
+
+3. Next the user now assumed the responsibility for fetching and saving the `AWS_CONFIG_FILE`. Note that the containers are fully enabled with all the necessary mounts of the `AWS_WEB_IDENTITY_TOKEN_FILE` and other environment variables. The only missing part is the actual file `AWS_CONFIG_FILE`. The user makes the following call to create the file
 ```python
 #Emulate Side-Car
 import requests
