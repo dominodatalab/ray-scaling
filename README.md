@@ -11,7 +11,7 @@ irsa_client_sidecar:
   enabled: false
 ```
 
-3. Next the user now assumed the responsibility for fetching and saving the `AWS_CONFIG_FILE`. Note that the containers are fully enabled with all the necessary mounts of the `AWS_WEB_IDENTITY_TOKEN_FILE` and other environment variables. The only missing part is the actual file `AWS_CONFIG_FILE`. The user makes the following call to create the file
+2. Next the user now assumed the responsibility for fetching and saving the `AWS_CONFIG_FILE`. Note that the containers are fully enabled with all the necessary mounts of the `AWS_WEB_IDENTITY_TOKEN_FILE` and other environment variables. The only missing part is the actual file `AWS_CONFIG_FILE`. The user makes the following call to create the file
 ```python
 #Emulate Side-Car
 import requests
